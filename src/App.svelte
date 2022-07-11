@@ -1,65 +1,60 @@
-<script lang="ts">
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+<script>
+  import { createDjotToHtmlConverter } from './djot'
+  import PreviewIframe from './PreviewIframe.svelte'
+
+  let status = 'Initializing Djot...'
+  let value = ''
+  let preview = false
+  const toHtmlPromise = createDjotToHtmlConverter(
+    (logText) => (status = logText),
+  )
 </script>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
+<main class="absolute inset-4 flex gap-4">
+  <div class="w-1/2 flex flex-col gap-2">
+    <h1>Djot</h1>
+    <div class="relative flex-1">
+      <textarea
+        class="absolute inset-0 w-full h-full rounded border border-slate-400 p-4"
+        bind:value
+      />
+    </div>
+  </div>
+  <div class="w-1/2 flex flex-col gap-2">
+    <h1>
+      HTML
+      <label>
+        <input type="checkbox" bind:checked={preview} /> Preview
+      </label>
+    </h1>
+    <div class="relative flex-1">
+      {#await toHtmlPromise}
+        <div
+          class="absolute inset-0 rounded border border-slate-400 overflow-auto bg-slate-200 p-4"
+        >
+          {status}
+        </div>
+      {:then toHtml}
+        {#if preview}
+          <div
+            class="absolute inset-0 rounded border border-slate-400 overflow-hidden"
+          >
+            <PreviewIframe html={toHtml(value)} />
+          </div>
+        {:else}
+          <div
+            class="absolute inset-0 rounded border border-slate-400 overflow-auto p-4"
+          >
+            <pre class="whitespace-pre-wrap">{toHtml(value)}</pre>
+          </div>
+        {/if}
+      {:catch error}
+        <div
+          class="absolute inset-0 rounded border border-red-400 overflow-auto bg-red-200 p-4"
+        >
+          Unable to initialize Djot: {String(error)}
+        </div>
+      {/await}
+    </div>
+  </div>
 </main>
-
-<style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-  }
-
-  img {
-    height: 16rem;
-    width: 16rem;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
-  }
-</style>
