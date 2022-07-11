@@ -128,6 +128,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/emscripten@npm:1.39.5":
+  version: 1.39.5
+  resolution: "@types/emscripten@npm:1.39.5"
+  checksum: cb92a991485164fa919f78f104253511f62c8e8ad0b2b9816a0660a092ec2df8606243beb84f380fef2058c764b4bc47c28d99b5fb9da5dc163b8d903f686cc9
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 18.0.3
   resolution: "@types/node@npm:18.0.3"
@@ -698,6 +705,7 @@ __metadata:
     tslib: ^2.3.1
     typescript: ^4.5.4
     vite: ^2.9.9
+    wasmoon: ^1.13.0
   languageName: unknown
   linkType: soft
 
@@ -1830,6 +1838,17 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: f78b54f58482ea97d385e36873ae1aa4744c5e467c1d6d4e0835bd55494d2d8f6ce763f17c241c66104be687d5ee535b8e1e96c14210c9ba0c343fe78c58f694
+  languageName: node
+  linkType: hard
+
+"wasmoon@npm:^1.13.0":
+  version: 1.13.0
+  resolution: "wasmoon@npm:1.13.0"
+  dependencies:
+    "@types/emscripten": 1.39.5
+  bin:
+    wasmoon: bin/wasmoon
+  checksum: a3b867bec9163bad748dcdbae51e59b66c8c00df85896a2daedb94443b93b7d1ffcbb97af727ecb0382991ac0dea4d3935023766e26baee09592b2a6e7c5b657
   languageName: node
   linkType: hard
 

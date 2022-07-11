@@ -19,5 +19,8 @@
     "typescript": "^4.5.4",
     "vite": "^2.9.9"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "wasmoon": "^1.13.0"
+  }
 }
