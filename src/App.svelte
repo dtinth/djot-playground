@@ -12,7 +12,15 @@
 
 <main class="absolute inset-4 flex gap-4">
   <div class="w-1/2 flex flex-col gap-2">
-    <h1>Djot</h1>
+    <h1>
+      <a class="font-bold hover:text-sky-700" href="https://github.com/jgm/djot"
+        >Djot</a
+      >
+      <a
+        class="hover:text-sky-700"
+        href="https://github.com/dtinth/djot-playground">Playground (PoC)</a
+      >
+    </h1>
     <div class="relative flex-1">
       <textarea
         class="absolute inset-0 w-full h-full rounded border border-slate-400 p-4"
